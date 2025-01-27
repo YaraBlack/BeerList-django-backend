@@ -16,6 +16,13 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import hello_world
+from base import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
-urlpatterns = [path("hello/", hello_world, name="hello")]
+urlpatterns = [
+    path("hello/", views.hello_world, name="hello"),
+    path("beers/", views.BeerListAll.as_view(), name="beers"),
+    path("beers/<int:pk>/", views.BeerListById.as_view(), name="beer_details"),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
