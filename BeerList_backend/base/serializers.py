@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Beer
+from .models import Beer
 
 
 class BeerSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,19 @@ class BeerSerializer(serializers.HyperlinkedModelSerializer):
     description = serializers.CharField(required=False, max_length=255)
     created = serializers.DateTimeField(read_only=True)
     updated = serializers.DateTimeField(read_only=True)
+
+    class Meta:
+        model = Beer
+        fields = [
+            "id",
+            "name",
+            "alcohol",
+            "ingridients",
+            "style",
+            "description",
+            "created",
+            "updated",
+        ]
 
     def create(self, validated_data):
         """
