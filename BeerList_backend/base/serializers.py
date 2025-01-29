@@ -10,7 +10,7 @@ class BeerSerializer(serializers.HyperlinkedModelSerializer):
     alcohol = serializers.DecimalField(
         required=False, max_digits=3, decimal_places=1
     )
-    ingridients = serializers.CharField(required=False, max_length=255)
+    ingredients = serializers.CharField(required=False, max_length=255)
     style = serializers.CharField(required=False, max_length=80)
     description = serializers.CharField(required=False, max_length=255)
     created = serializers.DateTimeField(read_only=True)
@@ -22,7 +22,7 @@ class BeerSerializer(serializers.HyperlinkedModelSerializer):
             "id",
             "name",
             "alcohol",
-            "ingridients",
+            "ingredients",
             "style",
             "description",
             "created",
@@ -41,8 +41,8 @@ class BeerSerializer(serializers.HyperlinkedModelSerializer):
         """
         instance.name = validated_data.get("name", instance.name)
         instance.alcohol = validated_data.get("alcohol", instance.alcohol)
-        instance.ingridients = validated_data.get(
-            "ingridients", instance.ingridients
+        instance.ingredients = validated_data.get(
+            "ingredients", instance.ingredients
         )
         instance.description = validated_data.get(
             "description", instance.description
