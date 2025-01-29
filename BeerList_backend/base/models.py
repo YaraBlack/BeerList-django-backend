@@ -11,7 +11,7 @@ class Beer(models.Model):
         name (str): The name of the beer. Max length is 255 chars.
         brewery (Brewery): The brewery object. Connects the brewery and the beer.
         alcohol (decimal): The alcohol percentage for the beer. Max length is 3 digits.
-        ingridients (str): Describes the ingridients for the beer. Max length is 255 chars.
+        ingredients (str): Describes the ingredients for the beer. Max length is 255 chars.
         style (str): Represents the style of the beer. Max length is 80 chars.
         description (str): Represents the description for the beer. Max length is 255 chars.
         image (ImageField): Represents the path for the image to the corresponding beer entry.
@@ -21,7 +21,7 @@ class Beer(models.Model):
 
     name = models.CharField(max_length=255)
     alcohol = models.DecimalField(max_digits=3, decimal_places=1)
-    ingridients = models.CharField(max_length=255)
+    ingredients = models.CharField(max_length=255)
     style = models.CharField(max_length=80)
     description = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
