@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, transaction
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -31,3 +32,32 @@ class Beer(models.Model):
 
     class Meta:
         ordering = ["name"]
+
+
+class Brewery(models.Model):
+    name = models.CharField(max_length=255, null=False, blank=False)
+    country = models.CharField(max_length=90, null=True, blank=True)
+    city = models.CharField(max_length=189, null=True, blank=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    founding_year = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(9999)],
+        null=False,
+        blank=False,
+    )
+    rating = models.DecimalField(
+        max_digits=2, decimal_places=1, default=0.00, null=False, blank=False
+    )
+    # logo = models.ImageField(upload_to="images/brewery/") # requires Pillow
+    website = models.URLField(max_length=255, null=True, blank=True)
+    instagram_url = models.URLField(max_length=255, null=True, blank=True)
+    facebook_url = models.URLField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        ordering = ["name"]
+
+
+class BeerBrewery(models.Model):
+    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
+    brewery = models.ForeignKey(Brewery, on_delete=models.CASCADE)
+    # contribution_percentage = models.DecimalField(max_digits=5,
+    #   decimal_places=2, null=True, blank=True)
